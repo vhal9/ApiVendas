@@ -1,6 +1,7 @@
 package io.github.vhal9.apivendas.services.imp;
 
 import io.github.vhal9.apivendas.exceptions.RegraDeNegocioException;
+import io.github.vhal9.apivendas.models.Enums.StatusPedido;
 import io.github.vhal9.apivendas.models.dto.ItemPedidoDTO;
 import io.github.vhal9.apivendas.models.dto.PedidoDTO;
 import io.github.vhal9.apivendas.models.entity.Cliente;
@@ -45,6 +46,7 @@ public class PedidoServiceImp implements PedidoService {
         pedido.setDataPedido(LocalDate.now());
         pedido.setTotal(pedidoDTO.getTotal());
         pedido.setCliente(cliente);
+        pedido.setStatusPedido(StatusPedido.REALIZADO);
 
         List<ItemPedido> itensPedido = converterItens(pedido, pedidoDTO.getItens());
 

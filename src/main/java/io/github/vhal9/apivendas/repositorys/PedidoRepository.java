@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
     @Query(" select p from Pedido p left join fetch p.itensPedido where p.id = :id")
-    Optional<Pedido> findByIdFetchItensPedido(@Param("id") Integer i
+    Optional<Pedido> findByIdFetchItensPedido(@Param("id") Integer id);
     
 }

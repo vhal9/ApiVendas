@@ -1,5 +1,6 @@
 package io.github.vhal9.apivendas.models.entity;
 
+import io.github.vhal9.apivendas.models.Enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,10 @@ public class Pedido {
 
     @Column(name = "ped_total", precision = 20, scale = 2)
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ped_status")
+    private StatusPedido statusPedido;
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itensPedido;
