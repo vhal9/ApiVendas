@@ -56,6 +56,13 @@ public class PedidoServiceImp implements PedidoService {
 
     }
 
+    @Override
+    public Optional<Pedido> obterPedidoCompleto(Integer idPedido) {
+
+        return pedidoRepository.findByIdFetchItensPedido(idPedido);
+
+    }
+
     private List<ItemPedido> converterItens(Pedido pedido, List<ItemPedidoDTO> itensPedido) {
 
         if(itensPedido.isEmpty()) {
