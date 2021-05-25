@@ -1,5 +1,6 @@
 package io.github.vhal9.apivendas.services.imp;
 
+import io.github.vhal9.apivendas.exceptions.PedidoNaoEncontradoException;
 import io.github.vhal9.apivendas.exceptions.RegraDeNegocioException;
 import io.github.vhal9.apivendas.models.Enums.StatusPedido;
 import io.github.vhal9.apivendas.models.dto.ItemPedidoDTO;
@@ -62,6 +63,19 @@ public class PedidoServiceImp implements PedidoService {
     public Optional<Pedido> obterPedidoCompleto(Integer idPedido) {
 
         return pedidoRepository.findByIdFetchItensPedido(idPedido);
+
+    }
+
+    @Override
+    @Transactional
+    public void AtualizaStatusPedido(Integer idPedido, StatusPedido statusPedido) {
+
+        pedidoRepository
+                .findById(idPedido)
+                .map( pedido -> {
+                    pedido.setStatusPedido(statusPedido);
+                    return pedidoRepository.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException());
 
     }
 

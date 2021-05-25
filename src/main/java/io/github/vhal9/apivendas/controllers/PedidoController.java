@@ -1,11 +1,12 @@
 package io.github.vhal9.apivendas.controllers;
 
+import io.github.vhal9.apivendas.models.Enums.StatusPedido;
+import io.github.vhal9.apivendas.models.dto.AtualizacaoStatusPedidoDTO;
 import io.github.vhal9.apivendas.models.dto.InformacoesItemPedidoDTO;
 import io.github.vhal9.apivendas.models.dto.InformacoesPedidoDTO;
 import io.github.vhal9.apivendas.models.dto.PedidoDTO;
 import io.github.vhal9.apivendas.models.entity.ItemPedido;
 import io.github.vhal9.apivendas.models.entity.Pedido;
-import io.github.vhal9.apivendas.repositorys.PedidoRepository;
 import io.github.vhal9.apivendas.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,16 @@ public class PedidoController {
                 .map(p -> converterPedido(p))
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido nao encontrado."));
                 
+    }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatusPedido(@PathVariable("id") Integer id,
+                                   @RequestBody AtualizacaoStatusPedidoDTO atualizacaoStatusPedidoDTO) {
+
+        String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
+        pedidoService.AtualizaStatusPedido(id, StatusPedido.valueOf(novoStatus));
+
     }
 
     private InformacoesPedidoDTO converterPedido(Pedido pedido) {
