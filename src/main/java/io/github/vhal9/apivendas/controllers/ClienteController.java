@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente save(@RequestBody Cliente cliente) {
+    public Cliente save(@RequestBody @Valid Cliente cliente) {
 
         return clienteRepository.save(cliente);
 
@@ -43,7 +44,7 @@ public class ClienteController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterar(@RequestBody Cliente cliente) {
+    public void alterar(@RequestBody @Valid Cliente cliente) {
 
         clienteRepository
                 .findById(cliente.getId())
