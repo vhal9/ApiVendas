@@ -1,5 +1,6 @@
 package io.github.vhal9.apivendas.models.dto;
 
+import io.github.vhal9.apivendas.validation.NotEmptyList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class PedidoDTO {
     @NotNull(message = "{campo.total-pedido.obrigatorio}")
     private BigDecimal total;
 
+    @NotEmptyList(message = "{campo.items-pedido.obrigatorio}")
     private List<ItemPedidoDTO> itens;
     
 }
