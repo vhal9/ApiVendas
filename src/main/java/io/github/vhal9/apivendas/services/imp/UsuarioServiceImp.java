@@ -1,5 +1,6 @@
 package io.github.vhal9.apivendas.services.imp;
 
+import io.github.vhal9.apivendas.exceptions.SenhaInvalidaException;
 import io.github.vhal9.apivendas.models.entity.Usuario;
 import io.github.vhal9.apivendas.repositorys.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,19 @@ public class UsuarioServiceImp implements UserDetailsService {
     public Usuario salvar(Usuario usuario) {
 
         return usuarioRepository.save(usuario);
+
+    }
+
+    public UserDetails autenticar(Usuario usuario) {
+
+        UserDetails user = loadUserByUsername(usuario.getLogin());
+        boolean senhaCorreta = encoder.matches(usuario.getSenha(), user.getPassword());
+
+        if (senhaCorreta) {
+            return user;
+        }
+
+        throw new SenhaInvalidaException();
 
     }
 
