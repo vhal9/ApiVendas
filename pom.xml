@@ -11,7 +11,30 @@
     <groupId>io.github.vhal9</groupId>
     <artifactId>ApiVendas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>${project.packaging}</packaging>
     <name>ApiVendas</name>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>desenvolvimento</id>
+            <properties>
+                <project.packaging>jar</project.packaging>
+                <tomcat.scope>compile</tomcat.scope>
+            </properties>
+
+        </profile>
+        <profile>
+            <id>producao</id>
+            <properties>
+                <project.packaging>war</project.packaging>
+                <tomcat.scope>provided</tomcat.scope>
+            </properties>
+        </profile>
+    </profiles>
+
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
@@ -23,6 +46,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>${tomcat.scope}</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
