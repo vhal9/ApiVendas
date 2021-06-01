@@ -17,6 +17,14 @@ A aplicação foi desenvolvida utilizando Java em conjunto do Framework Spring e
 - JDK 1.8
 - Maven 3
 
+## Tecnologias
+
+- JAVA
+- Spring Boot
+- Lombok
+- H2 Database
+- Swagger
+
 ## Execução
 
 Clone o projeto:
@@ -42,6 +50,12 @@ http://localhost:8081/sistema-vendas/swagger-ui.html
 File -> Open -> Selecione a raiz do projeto
 ```
 
+## Features
 
-
+- Migrar a aplicação para o Postgresql.
+- Adicionar verificação para validar o campo login como único.
+- relacionar pedidos com os usuários.
+- centralizar todas as mensagens de erros.
+- redefinir regras de acesso a rota de produtos.
+- incrementar a documentação do Swagger.
 
